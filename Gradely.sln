@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gradely.Web", "Gradely.Web\Gradely.Web.csproj", "{C73264E8-144B-4E8E-8C18-F3D4F24CA0B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C73264E8-144B-4E8E-8C18-F3D4F24CA0B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73264E8-144B-4E8E-8C18-F3D4F24CA0B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73264E8-144B-4E8E-8C18-F3D4F24CA0B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73264E8-144B-4E8E-8C18-F3D4F24CA0B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CEAA10E2-A5FE-435F-BB0C-BA4563243F47}
+	EndGlobalSection
+EndGlobal
