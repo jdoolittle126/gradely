@@ -1,23 +1,77 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import CallToAction from './generic/CallToAction'
+import FeatureDisplay from './generic/FeatureDisplay'
+
+const callToActionSection = () => (
+    <div className="d-flex flex-row flex-wrap-reverse flex-md-nowrap justify-content-between align-items-center py-2 my-3">
+        <div className="flex-column pb-2 px-4">
+            <CallToAction />
+        </div>
+        <div className="flex-column pb-2">
+            <img className="img-fluid" src="https://picsum.photos/1280/720" />
+        </div>
+    </div>
+);
+
+const featuresSection = () => (
+    <div className="py-2 my-3 bg-light">
+        <h1 className="font-weight-bold text-center pb-2">Features</h1>
+
+        <div className="d-flex flex-row flex-wrap flex-md-nowrap justify-content-between align-items-center pb-2">
+            <div className="flex-column pb-2">
+                <FeatureDisplay />
+            </div>
+            <div className="flex-column pb-2">
+                <FeatureDisplay />
+            </div>
+            <div className="flex-column pb-2">
+                <FeatureDisplay />
+            </div>
+        </div>
+
+        <div className="text-center">
+            <h2>Want to learn more?</h2>
+            <h3>Visit our
+                <button className="btn btn-primary font-weight-bold ml-2">Docs!</button>
+            </h3>
+        </div>
+
+    </div>
+);
+
+const teamSection = () => (
+    <div className="py-2 my-3">
+        <h1 className="font-weight-bold text-center pb-2">Our Team</h1>
+
+        <div className="d-flex flex-row flex-wrap flex-md-nowrap justify-content-between align-items-center pb-2">
+            <div className="flex-column pb-2">
+                <FeatureDisplay />
+            </div>
+            <div className="flex-column pb-2">
+                <FeatureDisplay />
+            </div>
+            <div className="flex-column pb-2">
+                <FeatureDisplay />
+            </div>
+        </div>
+    </div>
+);
+
 
 const Home = () => (
-  <div>
-    <h1>Hello, world!</h1>
-    <p>Welcome to your new single-page application, built with:</p>
-    <ul>
-      <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-      <li><a href='https://facebook.github.io/react/'>React</a> and <a href='https://redux.js.org/'>Redux</a> for client-side code</li>
-      <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-    </ul>
-    <p>To help you get started, we have also set up:</p>
-    <ul>
-      <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-      <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-      <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-    </ul>
-    <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-  </div>
+    <div>
+
+        {callToActionSection()}
+        {featuresSection()}
+        {teamSection()}
+
+        <div className="d-flex flex-row flex-wrap flex-md-nowrap justify-content-around align-items-center py-3 bg-light">
+            <h2 className="text-wrap">Questions? Suggestions? Let us know!</h2>
+            <button className="btn btn-lg btn-primary  font-weight-bold">Contact Us!</button>
+        </div>
+
+    </div>
 );
 
 export default connect()(Home);
