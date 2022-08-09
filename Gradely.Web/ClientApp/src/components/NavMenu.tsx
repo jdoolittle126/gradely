@@ -1,19 +1,23 @@
 import * as React from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Col, Offcanvas, OffcanvasBody, OffcanvasHeader, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+import SideBar from './SideBar';
 
-export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
+export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, sideBar: boolean }> {
+
     public state = {
-        isOpen: false
+        isOpen: false,
+        sideBar: false
     };
 
     public render() {
         return (
             <header>
-                <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
+                <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow pb-1" light>
                     <Container>
-                        <NavbarBrand tag={Link} to="/">Gradely.Web</NavbarBrand>
+                        <Button onClick={this.toggleSideBar} className="m-1">Sidebar Example</Button>
+                        <NavbarBrand tag={Link} to="/">Gradely</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} className="mr-2"/>
                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
                             <ul className="navbar-nav flex-grow">
@@ -21,17 +25,29 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                     <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                                    <NavLink tag={Link} className="text-dark" to="/">Features</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                                    <NavLink tag={Link} className="text-dark" to="/counter">Documentation</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} className="text-dark" to="/fetch-data">Contact Us</NavLink>
                                 </NavItem>
                             </ul>
                         </Collapse>
                     </Container>
                 </Navbar>
+
+                <SideBar isOpen={this.state.sideBar} toggle={this.toggleSideBar} />
+
             </header>
         );
+    }
+
+    private toggleSideBar = () => {
+        this.setState({
+            sideBar: !this.state.sideBar
+        });
     }
 
     private toggle = () => {

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import CallToAction from './generic/CallToAction'
-import FeatureDisplay from './generic/FeatureDisplay'
+import CallToAction from '../generic/CallToAction';
+import FeatureDisplay from '../generic/FeatureDisplay';
+
 
 const callToActionSection = () => (
     <div className="d-flex flex-row flex-wrap-reverse flex-md-nowrap justify-content-between align-items-center py-2 my-3">
