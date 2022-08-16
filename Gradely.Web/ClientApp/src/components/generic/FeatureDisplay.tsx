@@ -1,18 +1,33 @@
 ﻿import * as React from 'react';
 import { connect } from 'react-redux';
 
-const FeatureDisplay = () => (
+type FeatureProps = {
+    name: string;
+    image?: string;
+}
 
-    <div className="container text-center my-1">
-        <div>
-            <img className="rounded-circle" src="https://picsum.photos/200"/>
+class FeatureDisplay extends React.Component<FeatureProps> {
+
+    constructor(props: FeatureProps) {
+        super(props);
+    }
+
+    public render() {
+        return (
+        <div className="container text-center my-1">
+            <div>
+                <img className="rounded-circle" src={this.props.image == '' ? 'https://picsum.photos/200' : this.props.image}/>
+            </div>
+            <div className="pt-2">
+                <h4>{this.props.name}</h4>
+                <div className="border-bottom mx-5 mb-2"></div>
+                <div>
+                    {this.props.children}
+                </div>
+            </div>
         </div>
+        );
+    }
+}
 
-        <div className="pt-2">
-            <h4>Sample Feature</h4>
-            <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-    </div>
-);
-
-export default connect()(FeatureDisplay);
+export default FeatureDisplay;
