@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import CallToAction from '../generic/CallToAction';
 import FeatureDisplay from '../generic/FeatureDisplay';
+import CrudDisplay, {CrudAction, CrudActions} from "../crud-display/CrudDisplay";
 
 
 const callToActionSection = () => (
@@ -21,20 +22,26 @@ const featuresSection = () => (
 
         <div className="d-flex flex-row flex-wrap flex-md-nowrap justify-content-between align-items-center pb-2">
             <div className="flex-column pb-2">
-                <FeatureDisplay />
+                <FeatureDisplay name="Feature 1" image="">
+                    <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </FeatureDisplay>
             </div>
             <div className="flex-column pb-2">
-                <FeatureDisplay />
+                <FeatureDisplay name="Feature 2" image="">
+                    <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </FeatureDisplay>
             </div>
             <div className="flex-column pb-2">
-                <FeatureDisplay />
+                <FeatureDisplay name="Feature 3" image="">
+                    <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </FeatureDisplay>
             </div>
         </div>
 
         <div className="text-center">
             <h2>Want to learn more?</h2>
             <h3>Visit our
-                <button className="btn btn-primary font-weight-bold ml-2">Docs!</button>
+                <button className="btn btn-primary font-weight-bold mx-2">Docs!</button>
             </h3>
         </div>
 
@@ -47,22 +54,26 @@ const teamSection = () => (
 
         <div className="d-flex flex-row flex-wrap flex-md-nowrap justify-content-between align-items-center pb-2">
             <div className="flex-column pb-2">
-                <FeatureDisplay />
+                <FeatureDisplay name="Feature 1" image="">
+                    <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </FeatureDisplay>
             </div>
             <div className="flex-column pb-2">
-                <FeatureDisplay />
+                <FeatureDisplay name="Feature 2" image="">
+                    <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </FeatureDisplay>
             </div>
             <div className="flex-column pb-2">
-                <FeatureDisplay />
+                <FeatureDisplay name="Feature 3" image="">
+                    <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </FeatureDisplay>
             </div>
         </div>
     </div>
 );
 
-
 const Home = () => (
     <div>
-
         {callToActionSection()}
         {featuresSection()}
         {teamSection()}
