@@ -7,12 +7,7 @@ import {
     NavbarToggler,
     NavItem,
     NavLink,
-    Col,
-    Offcanvas,
-    OffcanvasBody,
-    OffcanvasHeader,
-    Button,
-    ButtonGroup
+    Button
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
@@ -27,10 +22,6 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
         isLoggedIn: null
     };
 
-    public onSignIn = () => {
-        console.log("TEST");
-    }
-
     public getProfileSection = () => {
         console.log(this.state.isLoggedIn)
         if (this.state.isLoggedIn != null) {
@@ -39,7 +30,6 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
                     <Button>
                         Sign Out
                     </Button>
-
                 </div>);
         } else {
             return (
@@ -55,8 +45,6 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
                 }}
             />);
         }
-
-
     }
 
     public render() {
@@ -88,6 +76,9 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
                                         </NavItem>
                                         <NavItem>
                                             <NavLink tag={Link} className="text-dark" to="/demo">Demo</NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink tag={Link} className="text-dark" to="/editor">Editor</NavLink>
                                         </NavItem>
                                     </ul>
                                 </Collapse>

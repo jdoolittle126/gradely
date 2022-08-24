@@ -61,7 +61,6 @@ const getActions = () => {
 
 const Demo = () => (
     <div>
-        <div className="g-signin2" data-onsuccess="onSignIn"></div>
         <div className="py-3">
             <CrudDisplay actions={getActions()} name="Users" columns={['First Name', 'Last Name', 'Email', 'Description']} data={sampleData} />
         </div>
