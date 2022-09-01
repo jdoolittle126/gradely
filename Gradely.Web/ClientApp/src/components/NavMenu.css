@@ -4,6 +4,11 @@
     word-break: break-all;
 }
 
+.nopad {
+    margin: 0 -12px!important;
+    width: calc(100% + 24px);
+}
+
 html { font-size: 14px; }
 
 @media (min-width: 768px) {
