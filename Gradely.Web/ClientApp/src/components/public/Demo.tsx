@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 import CrudDisplay, {CrudAction, CrudActions} from "../crud-display/CrudDisplay";
+import {ProfileDisplay} from "../account/ProfileDisplay";
 
 const getMockData = () => {
     let data = [];
@@ -64,6 +65,7 @@ const Demo = () => (
         <div className="py-3">
             <CrudDisplay actions={getActions()} name="Users" columns={['First Name', 'Last Name', 'Email', 'Description']} data={sampleData} />
         </div>
+        <ProfileDisplay></ProfileDisplay>
     </div>
 
 );

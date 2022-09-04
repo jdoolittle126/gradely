@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap';
+import {NavLink, Offcanvas, OffcanvasBody, OffcanvasHeader} from 'reactstrap';
+import {Link} from "react-router-dom";
 
 export default class SideBar extends React.PureComponent<{isOpen: boolean, toggle: () => void}, { }> {
 
@@ -10,7 +11,7 @@ export default class SideBar extends React.PureComponent<{isOpen: boolean, toggl
                     :)
                 </OffcanvasHeader>
                 <OffcanvasBody>
-                    This is where our sidebar will go!
+                    <NavLink tag={Link} className="text-dark" to="/users">Users</NavLink>
                 </OffcanvasBody>
             </Offcanvas>
         );
