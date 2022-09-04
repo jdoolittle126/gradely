@@ -7,12 +7,26 @@ import {
     NavbarToggler,
     NavItem,
     NavLink,
-    Button
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    Nav,
+    TabContent,
+    TabPane,
+    Form,
+    Row,
+    Col,
+    FormGroup,
+    Label,
+    Input,
+    FormFeedback, ModalFooter
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 import SideBar from './SideBar';
 import {CredentialResponse, GoogleLogin, googleLogout} from "@react-oauth/google";
+import {LoginDisplay} from "./account/LoginDisplay";
 
 export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, sideBar: boolean, isLoggedIn: CredentialResponse | null }> {
 
@@ -33,17 +47,11 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
                 </div>);
         } else {
             return (
-                <GoogleLogin
-                onSuccess={credentialResponse => {
-                    this.setState({
-                        isLoggedIn: credentialResponse
-                    });
-                    console.log(credentialResponse);
-                }}
-                onError={() => {
-                    console.log('Login Failed');
-                }}
-            />);
+                <div>
+                    <LoginDisplay></LoginDisplay>
+                </div>
+
+            );
         }
     }
 
