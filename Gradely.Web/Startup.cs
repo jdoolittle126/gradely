@@ -24,6 +24,17 @@ namespace Gradely.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://dev-thbuvd3p.us.auth0.com/";
+                options.Audience = "http://localhost:3000";
+            });
+
             services.AddDbContext<GradelyContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
