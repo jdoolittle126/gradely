@@ -17,21 +17,21 @@ import {
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 import SideBar from './SideBar';
-import {CredentialResponse, GoogleLogin, googleLogout} from "@react-oauth/google";
+//import {CredentialResponse, GoogleLogin, googleLogout} from "@react-oauth/google";
 
-export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, sideBar: boolean, isLoggedIn: CredentialResponse | null }> {
+export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, sideBar: boolean/*, isLoggedIn: CredentialResponse | null*/ }> {
 
-    public state: { isOpen: boolean, sideBar: boolean, isLoggedIn: CredentialResponse | null } = {
+    public state: { isOpen: boolean, sideBar: boolean/*, isLoggedIn: CredentialResponse | null*/ } = {
         isOpen: false,
         sideBar: false,
-        isLoggedIn: null
+        //isLoggedIn: null
     };
 
     public onSignIn = () => {
         console.log("TEST");
     }
 
-    public getProfileSection = () => {
+    /*public getProfileSection = () => {
         console.log(this.state.isLoggedIn)
         if (this.state.isLoggedIn != null) {
             return (
@@ -57,7 +57,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
         }
 
 
-    }
+    }*/
 
     public render() {
         return (
@@ -93,7 +93,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
                                 </Collapse>
                             </div>
                             <div className="col bg-primary d-flex align-items-center flex-row-reverse">
-                                {this.getProfileSection()}
+                                {/* this.getProfileSection() */ }
                             </div>
                     </Container>
                 </Navbar>
