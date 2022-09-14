@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 const CallToAction = () => (
     <div className="container text-center">
-        <div className="text-center border-bottom pb-2 mb-2 mx-1">
-            <h1>Grading</h1>
-            <h2>Creating Class</h2>
+        <div className="text-center  border-bottom pb-2 mb-2 mx-1">
+            <h1 className='fs-1'>Report Cards,</h1>
+            <h2 className='fs-2'>Made Easy</h2>
         </div>
 
         <p className="text-justify px-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

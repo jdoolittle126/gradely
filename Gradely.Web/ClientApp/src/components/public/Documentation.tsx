@@ -2,61 +2,85 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import CallToAction from '../generic/CallToAction';
-import UploadingRoster from '../generic/CreatingaClass';
-import EnteringGrades from '../generic/CreatingaClass';
+import UploadingRoster from '../generic/UploadingRoster';
+import EnteringGrades from '../generic/EnteringGrades';
 import CrudDisplay, { CrudAction, CrudActions } from "../crud-display/CrudDisplay";
+import CreatingaClass from '../generic/CreatingaClass';
 
 
 
 
 
 const DocPage = () => (
+    
+    <div className="container mt-5 w-75">
+        
+        
+        <div className="row ">
 
-    <div>
+            <div className="col-sm-4 border-end ">
+                <div className="container-fluid mx-auto ">
 
+                    <ul className="nav nav-pills flex-column  ">
 
+                            <h6>Grading</h6>
+            
+                        <li className="nav-item list-style-type circle ">
+                                <a className="nav-link" href="#">Creating a Class</a>
+                            </li>
 
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Uploading your Roster</a>
+                            </li>
 
-        <div className="d-flex align-items-start">
-            <nav className="navbar justify-content-start d-flex flex-row flex-wrap row ">
-
-                <h4>Grading</h4>
-                <ul className="nav flex-column ">
-
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Creating a class</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Uploading your Roster</a>
-                    </li>
-                    <li className="nav-item border-bottom">
-                        <a className="nav-link" href="#">Entering Grades</a>
-                    </li>
-                </ul>
-            </nav>
-
-
-            <div className="d-flex flex-row flex-wrap-reverse flex-md-nowrap justify-content-between align-items-center py-2 my-3">
-                <div className="flex-column pb-2 px-4">
-                    <CallToAction />
+                            <li className="nav-item border-bottom">
+                                    <a className="nav-link" href="#">Entering Grades</a>
+                            </li>
+                        
+                    </ul>
+                    
                 </div>
-                <div className="flex-column pb-2">
-                    <img className="img-fluid" src="https://picsum.photos/1280/720" />
-                </div>
-                
             </div>
+            
 
 
+            <div className="col-sm-8 text-center text-wrap justify-content-between ">
 
+                <div className="mb-4">
+                    <div className="mb-4 text-start">
+                            <h1 className="mt-2 border-bottom justify-content-center mb-2">Grading</h1>
+                
+                    </div>
+                </div>
 
-        </div>
+                    <div className="d-flex flex-row flex-wrap-reverse flex-md-nowrap justify-content-between align-items-center py-2 my-3">
+                            <div className="flex-column pb-2 px-4">
+                                <CreatingaClass />
+                            </div>
+                            <div className="flex-column pb-2">
+                                <img className="rounded-circle" src="https://picsum.photos/200" />
+                            </div>
+                    </div>
 
+                    <div className="d-flex flex-row flex-wrap-reverse flex-md-nowrap justify-content-between align-items-center py-2 my-3">
+                            <div className="flex-column pb-2 px-4">
+                                <UploadingRoster />
+                            </div>
+                            <div className="flex-column pb-2">
+                                <img className="rounded-circle" src="https://picsum.photos/200" />
+                            </div>
+
+                    </div>
+                        
+                        
+             </div>
 
                 
-          
+                
+        </div>
+   </div>
 
-    </div>
-
+   
 )
 
 

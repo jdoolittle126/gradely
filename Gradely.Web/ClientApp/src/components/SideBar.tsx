@@ -10,7 +10,8 @@ export default class SideBar extends React.PureComponent<{isOpen: boolean, toggl
                     :)
                 </OffcanvasHeader>
                 <OffcanvasBody>
-                    This is where our sidebar will go!
+
+
                 </OffcanvasBody>
             </Offcanvas>
         );
