@@ -13,7 +13,6 @@ namespace Gradely.DataAccess.DataAccess
         public DbSet<Class> Classes { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Organization> Organizations { get; set; }
-        public DbSet<Privilege> Privileges { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Template> Templates { get; set; }
         public DbSet<Term> Terms { get; set; }

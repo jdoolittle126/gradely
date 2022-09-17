@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Button,
     Col,
@@ -13,38 +13,143 @@ import {
     Row, TabContent, TabPane
 } from "reactstrap";
 import CrudDisplay, {CrudAction, CrudActions} from "../crud-display/CrudDisplay";
+import * as Yup from "yup";
+import {UserForm} from "../forms/UserForm";
+import {useProtectedApi} from "../../services/UseProtectedApi";
+import {useAuth0} from "@auth0/auth0-react";
+import fetchData from "../FetchData";
+
+enum ModalTypes {
+    CREATE_EDIT_MODAL,
+    DELETE_MODAL
+}
+
+enum ModalTabs {
+    TAB_DETAILS,
+    TAB_PERMISSIONS
+}
+
+const CREATE_USER_ID = 0;
+
+type UserTable = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    role: string;
+}
 
 export const UsersPage = () => {
 
-    const [modal, setModal] = useState(true);
-    const [currentSelection, setCurrentSelection] = useState(0);
-    const [currentTab, setCurrentTab] = useState(0);
+    // Not my best work, this is really sloppy, but
+    // I just need it to work for now :)
+    const { getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
+    const [modal, setModal] = useState(false);
+    const [currentSelection, setCurrentSelection] = useState(CREATE_USER_ID);
+    const [currentModal, setCurrentModal] = useState(ModalTypes.CREATE_EDIT_MODAL);
+    const [currentTab, setCurrentTab] = useState(ModalTabs.TAB_DETAILS);
+    const [currentOnComplete, setCurrentOnComplete] = useState(() => () => {});
+    const [userData, setUserData] = useState<UserTable[]>([]);
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            const accessToken = await getAccessTokenSilently({scope: 'users:view'});
+            const response = await fetch(`${window.location.origin}/api/Users`, {
+                headers: {
+                    'Accept': "application/json, text/plain, */*",
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                method: "GET"
+            });
+
+            const data = await response.json();
+
+            let tableData = [];
+
+
+            for(const item of data) {
+
+                let meep: UserTable = {
+                    firstName: item.given_name,
+                    lastName: item.family_name,
+                    email: item.email,
+                    role: 'WIP'
+                }
+
+                tableData.push(meep);
+            }
+
+            console.log(data);
+            console.log(tableData);
+            setUserData(tableData);
+        }
+
+        fetchData()
+            .catch(console.error);
+
+    }, [])
+
+    const { loading, error, data: users = [] } = useProtectedApi(
+        `${window.location.origin}/api/Users`,
+        {
+            headers: {
+                'Accept': "application/json, text/plain, */*"
+            },
+            method: "GET",
+            scope: 'users:view',
+        }
+    );
+
+
     const toggle = () => {
         setModal(!modal);
-        if (!modal) setCurrentTab(0);
+        if (!modal) {
+            setCurrentTab(ModalTabs.TAB_DETAILS);
+        } else {
+            currentOnComplete();
+        }
     }
 
-    const sampleEditAction = (id: number, onComplete: () => void) => {
+    const userCreateAction = (id: number, onComplete: () => void) => {
+        setCurrentModal(ModalTypes.CREATE_EDIT_MODAL);
+        setCurrentSelection(CREATE_USER_ID);
+        setCurrentOnComplete(() => onComplete)
+        toggle();
+    }
+
+    const userEditAction = (id: number, onComplete: () => void) => {
+        setCurrentModal(ModalTypes.CREATE_EDIT_MODAL);
         sampleData[id].email = "Edit action was called!";
         setCurrentSelection(id);
+        setCurrentOnComplete(() => onComplete)
         toggle();
-        onComplete();
     }
 
-    const sampleDeleteAction = (id: number, onComplete: () => void) => {
+    const userDeleteAction = (id: number, onComplete: () => void) => {
+        setCurrentModal(ModalTypes.DELETE_MODAL);
         sampleData[id].email = "Delete action was called!";
-        onComplete();
+        setCurrentOnComplete(() => onComplete)
+        toggle();
+    }
+
+    const getUserCreateAction = () => {
+        let create: CrudAction = {
+            action: userCreateAction,
+            name: 'Create',
+            color: 'primary'
+        }
+        return create;
     }
 
     const getActions = () => {
         let edit: CrudAction = {
-            action: sampleEditAction,
+            action: userEditAction,
             name: 'Edit',
             color: 'primary'
         }
 
         let del: CrudAction = {
-            action: sampleDeleteAction,
+            action: userDeleteAction,
             name: 'Delete',
             color: 'danger'
         }
@@ -59,105 +164,81 @@ export const UsersPage = () => {
     return (
         <Container>
             <Row className={'mt-4'}>
-                <CrudDisplay actions={getActions()} name="Users" columns={['First Name', 'Last Name', 'Email', 'Description']} data={sampleData} />
+                <CrudDisplay
+                    actions={getActions()}
+                    create={getUserCreateAction()}
+                    name="Users"
+                    columns={['First Name', 'Last Name', 'Email', 'Role']}
+                    data={userData} />
             </Row>
 
+
             <Modal isOpen={modal} centered={true} toggle={toggle} backdrop={"static"}>
-                <ModalHeader toggle={toggle}>
-                    {(currentSelection === 0) ? 'Create' : 'Update'} User
-                </ModalHeader>
 
-                <ModalBody>
-                    <Nav tabs>
-                        <NavItem>
-                            <NavLink
-                                className={currentTab === 0 ? 'active' : ''}
-                                onClick={function noRefCheck(){
-                                    setCurrentTab(0);
-                                }}
-                            >Details</NavLink>
-                        </NavItem>
+                {(currentModal === ModalTypes.CREATE_EDIT_MODAL) ? (
+                    <>
+                        <ModalHeader toggle={toggle}>
+                            {(currentSelection === CREATE_USER_ID) ? 'Create' : 'Update'} User
+                        </ModalHeader>
 
-                        <NavItem>
-                            <NavLink
-                                className={currentTab === 1 ? 'active' : ''}
-                                onClick={function noRefCheck(){
-                                    setCurrentTab(1);
-                                }}
-                            >Permissions</NavLink>
-                        </NavItem>
-                    </Nav>
+                        <ModalBody>
+                            <Nav tabs>
+                                <NavItem>
+                                    <NavLink
+                                        className={currentTab === ModalTabs.TAB_DETAILS ? 'active' : ''}
+                                        onClick={function noRefCheck(){
+                                            setCurrentTab(ModalTabs.TAB_DETAILS);
+                                        }}
+                                    >Details</NavLink>
+                                </NavItem>
 
-                    <TabContent activeTab={currentTab}>
-                        <TabPane tabId={0}>
-                            <Form>
-                                <Row>
-                                    <Col md={6}>
-                                        <FormGroup>
-                                            <Label for="userFirstName">
-                                                First Name
-                                            </Label>
-                                            <Input
-                                                invalid={false}
-                                                id="userFirstName"
-                                                name="firstName"
-                                                placeholder="John"
-                                                type="text"
-                                            />
-                                            <FormFeedback invalid>
+                                <NavItem>
+                                    <NavLink
+                                        className={currentTab === ModalTabs.TAB_PERMISSIONS ? 'active' : ''}
+                                        onClick={function noRefCheck(){
+                                            setCurrentTab(ModalTabs.TAB_PERMISSIONS);
+                                        }}
+                                    >Permissions</NavLink>
+                                </NavItem>
+                            </Nav>
 
-                                            </FormFeedback>
-                                        </FormGroup>
-                                    </Col>
-                                    <Col md={6}>
-                                        <FormGroup>
-                                            <Label for="userLastName">
-                                                Last Name
-                                            </Label>
-                                            <Input
-                                                id="userLastName"
-                                                name="lastName"
-                                                placeholder="Doe"
-                                                type="text"
-                                            />
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
+                            <UserForm
+                                currentTab={currentTab}
+                                loadedId={currentSelection}
+                            ></UserForm>
+                        </ModalBody>
 
-                                <Row>
-                                    <FormGroup>
-                                        <Label for="userEmailAddress">
-                                            Email Address
-                                        </Label>
-                                        <Input
-                                            id="userEmailAddress"
-                                            name="emailAddress"
-                                            placeholder="john.doe@email.com"
-                                            type="email"
-                                        />
-                                        <FormFeedback invalid>
-                                        </FormFeedback>
-                                    </FormGroup>
-                                </Row>
+                        <ModalFooter>
+                            <Button color="primary" onClick={toggle}>
+                                {(currentSelection === CREATE_USER_ID) ? 'Create' : 'Update'}
+                            </Button>{' '}
+                            <Button color="danger" onClick={toggle}>
+                                Cancel
+                            </Button>
+                        </ModalFooter>
+                    </>
 
+                ) : (<>
 
-                            </Form>
-                            {currentSelection}
-                        </TabPane>
-                        <TabPane tabId={1}>
-                            TEST
-                        </TabPane>
-                    </TabContent>
-                </ModalBody>
+                    <ModalHeader toggle={toggle}>
+                        Confirm Delete
+                    </ModalHeader>
 
-                <ModalFooter>
-                    <Button color="primary" onClick={toggle}>
-                        {(currentSelection === 0) ? 'Create' : 'Update'}
-                    </Button>{' '}
-                    <Button color="danger" onClick={toggle}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
+                    <ModalBody>
+                        Are you sure you want to delete this user?
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button color="danger" onClick={toggle}>
+                            Delete
+                        </Button>{' '}
+                        <Button color="secondary" onClick={toggle}>
+                            Cancel
+                        </Button>
+                    </ModalFooter>
+
+                </>)}
+
             </Modal>
 
         </Container>
@@ -170,7 +251,7 @@ const getMockData = () => {
     let firstNames = ['Jonathan', 'Jason', 'Russ'];
     let lastNames = ['Doolittle', 'Mandras', 'Souffrant'];
 
-    for (let i =0; i < 50; i++) {
+    for (let i =0; i < 1; i++) {
 
         let firstName = firstNames[Math.floor(Math.random() * firstNames.length)]
         let lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
@@ -188,9 +269,6 @@ const getMockData = () => {
 }
 
 let sampleData = getMockData();
-
-
-
 
 
 export default UsersPage;

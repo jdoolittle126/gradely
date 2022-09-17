@@ -18,6 +18,7 @@ type CrudDisplayProps = {
     name: string;
     columns?: string[];
     data?: any[];
+    create?: CrudAction;
     actions?: CrudActions;
 }
 
@@ -134,6 +135,17 @@ class CrudDisplay extends React.Component<CrudDisplayProps, CrudDisplayState> {
                 <tr key={this.keyFor('row', item)}>
                     {this.buildRow(item, item._id)}
                 </tr>));
+
+        if (rows.length === 0) {
+            rows.push(<tr key={this.keyFor('row', 'NO_DATA')}>
+                <td
+                    colSpan={(this.props.columns?.length ?? 0) + 2}
+                    className={'text-center bg-light text-muted fst-italic'}>
+                    No data!
+                </td>
+            </tr>)
+        }
+
         return rows;
     }
 
@@ -170,7 +182,17 @@ class CrudDisplay extends React.Component<CrudDisplayProps, CrudDisplayState> {
                     <CardHeader>
                         <Row>
                             <Col xs={8}>
-                                <h3>{this.props.name}</h3>
+                                <div className={'d-flex'}>
+                                    <h3 className={'me-4'}>{this.props.name}</h3>
+                                    <Button
+                                        color={'primary'}
+                                        onClick={() => {
+                                            this.props.create?.action(-1, () => this.filter(this.state.filter))
+                                        }}>
+                                        <i className="fas fa-plus me-2"></i>
+                                        Create
+                                    </Button>
+                                </div>
                             </Col>
                             <Col>
                                 <SearchBar filter={this.filter}/>

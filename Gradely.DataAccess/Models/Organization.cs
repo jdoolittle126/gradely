@@ -11,15 +11,21 @@ namespace Gradely.DataAccess.Models
     public class Organization
     {
         public int Id { get; set; }
-        [Required]
+        [Required] [MaxLength(256)]
+        public string Name { get; set; } = "";
         [MaxLength(256)]
-        public string Name { get; set; }
-        public string Icon { get; set; }
+        public string Address1 { get; set; } = "";
         [MaxLength(256)]
-        public string Address { get; set; }
+        public string Address2 { get; set; } = "";
+        [MaxLength(256)]
+        public string City { get; set; } = "";
+        [MaxLength(256)]
+        public string State { get; set; } = "";
+        [MaxLength(12)]
+        public string ZipCode { get; set; } = "";
         [MaxLength(25)]
         [Column(TypeName = "varchar(25)")]
-        public string Phone { get; set; }
+        public string Phone { get; set; } = "";
         public List<User> Users { get; set; } = new List<User>();
         public List<Template> Templates { get; set; } = new List<Template>();
         public List<TermSchedule> TermSchedules { get; set; } = new List<TermSchedule>();
