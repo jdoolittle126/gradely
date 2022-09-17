@@ -1,23 +1,78 @@
 import * as React from 'react';
-import { Route } from 'react-router';
-import Layout from './components/Layout';
+import {Fetcher, Route, Routes} from 'react-router-dom';
 import Home from './components/public/Home';
-import Counter from './components/Counter';
-import FetchData from './components/FetchData';
-import {GoogleOAuthProvider} from "@react-oauth/google";
-import Demo from "./components/public/Demo";
+
 import './custom.css'
 import TemplateEditor from "./components/template-editor/TemplateEditor";
+import UsersPage from "./components/crud-pages/UsersPage";
+import {
+    useAuth0,
+    withAuthenticationRequired,
+    WithAuthenticationRequiredOptions
+} from "@auth0/auth0-react";
+import NavMenu from "./components/NavMenu";
+import {Button, Col, Container, Row} from "reactstrap";
+import Footer from "./components/Footer";
+
+const ProtectedRoute = (props: {
+    component: React.ComponentType<object>;
+    args?:  WithAuthenticationRequiredOptions;
+}) => {
+    const Component = withAuthenticationRequired(props.component, props.args);
+    return <Component />;
+};
+
+export default () => {
+
+    const { isLoading } = useAuth0();
+
+    if (isLoading) {
+        return (
+            <div id={'app'} className={'bg-gradely-light align-items-center d-flex justify-content-center'}>
+                <div className="text-center text-light">
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                    <p className={'mt-2 fs-2 text'}>Taking too long?</p>
+                    <a className={'btn btn-gradely-dark text-light'} href={window.location.origin}>
+                        Try signing back in!
+                    </a>
+                </div>
+            </div>
+        );
+    }
 
 
-export default () => (
-    <GoogleOAuthProvider clientId="723058851181-mg5vu25h00q9n70s6trt3s01qem4taa7.apps.googleusercontent.com">
-        <Layout>
-            <Route exact path='/' component={Home} />
-            <Route path='/counter' component={Counter} />
-            <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
-            <Route path='/demo' component={Demo} />
-            <Route path='/editor' component={TemplateEditor} />
-        </Layout>
-    </GoogleOAuthProvider>
-);
+    return (
+        <div
+            id={'app'}
+            className={'d-flex flex-column justify-content-center'}>
+            <Row >
+                <NavMenu />
+            </Row>
+            <Row className={'flex-grow-1'}>
+                <Col>
+                    <div className={'container'}>
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='/editor' element={<TemplateEditor />} />
+                            <Route path='/users' element={<UsersPage />} />
+
+                            <Route path='/profile' element={<UsersPage />} />
+                            <Route path='/documentation' element={<UsersPage />} />
+                            <Route path='/roster' element={<UsersPage />} />
+                            <Route path='/templates' element={<UsersPage />} />
+                            <Route path='/terms' element={<UsersPage />} />
+                            
+                            {//<Route path='/users' element={<ProtectedRoute component={UsersPage} />} />
+                            }
+                        </Routes>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <Footer />
+            </Row>
+        </div>
+    );
+}

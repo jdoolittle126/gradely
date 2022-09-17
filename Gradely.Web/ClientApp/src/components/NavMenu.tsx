@@ -7,12 +7,26 @@ import {
     NavbarToggler,
     NavItem,
     NavLink,
-    Button
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    Nav,
+    TabContent,
+    TabPane,
+    Form,
+    Row,
+    Col,
+    FormGroup,
+    Label,
+    Input,
+    FormFeedback, ModalFooter
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 import SideBar from './SideBar';
 import {CredentialResponse, GoogleLogin, googleLogout} from "@react-oauth/google";
+import {LoginDisplay} from "./account/LoginDisplay";
 
 export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, sideBar: boolean, isLoggedIn: CredentialResponse | null }> {
 
@@ -23,7 +37,6 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
     };
 
     public getProfileSection = () => {
-        console.log(this.state.isLoggedIn)
         if (this.state.isLoggedIn != null) {
             return (
                 <div>
@@ -33,17 +46,11 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
                 </div>);
         } else {
             return (
-                <GoogleLogin
-                onSuccess={credentialResponse => {
-                    this.setState({
-                        isLoggedIn: credentialResponse
-                    });
-                    console.log(credentialResponse);
-                }}
-                onError={() => {
-                    console.log('Login Failed');
-                }}
-            />);
+                <div>
+                    <LoginDisplay></LoginDisplay>
+                </div>
+
+            );
         }
     }
 
@@ -53,13 +60,13 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
                 <Navbar className="navbar-expand-sm navbar-toggleable-sm pb-1 px-0 mx-0" light>
                     <Container fluid className="py-1 px-0 mx-0 row nopad">
                             <NavbarToggler onClick={this.toggle} className="mr-2"/>
-                            <div className="col-2 bg-primary rounded-end d-flex align-items-center">
+                            <div className="col-2 bg-gradely-light rounded-end d-flex align-items-center ">
                                 <i role="button" onClick={this.toggleSideBar} className="fa-solid fa-bars fa-2xl"></i>
                             </div>
                             <NavbarBrand tag={Link} to="/" className="col-2">
                                 <img className="img-fluid" src="/banner.svg"/>
                             </NavbarBrand>
-                            <div className="col-6 bg-primary rounded-start">
+                            <div className="col-6 bg-gradely-light rounded-start">
                                 <Collapse className="d-sm-inline-flex flex-sm-row p-lg-3" isOpen={this.state.isOpen} navbar>
                                     <ul className="navbar-nav flex-grow">
                                         <NavItem>
@@ -74,16 +81,10 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean, 
                                         <NavItem>
                                             <NavLink tag={Link} className="text-dark" to="/fetch-data">Contact Us</NavLink>
                                         </NavItem>
-                                        <NavItem>
-                                            <NavLink tag={Link} className="text-dark" to="/demo">Demo</NavLink>
-                                        </NavItem>
-                                        <NavItem>
-                                            <NavLink tag={Link} className="text-dark" to="/editor">Editor</NavLink>
-                                        </NavItem>
                                     </ul>
                                 </Collapse>
                             </div>
-                            <div className="col bg-primary d-flex align-items-center flex-row-reverse">
+                            <div className="col bg-gradely-light d-flex align-items-center flex-row-reverse">
                                 {this.getProfileSection()}
                             </div>
                     </Container>
