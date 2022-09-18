@@ -59,3 +59,19 @@ body {
 #app {
   min-height: 100vh;
 }
+
+.component-selected {
+  position: relative;
+}
+
+.component-selected:after {
+  content: " ";
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #8f83bf;
+}

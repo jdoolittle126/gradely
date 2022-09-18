@@ -1,10 +1,9 @@
 import * as React from 'react';
-import {Fetcher, Route, Routes} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './components/public/Home';
 
 import './custom.css'
-import TemplateEditor from "./components/template-editor/TemplateEditor";
-import UsersPage from "./components/crud-pages/UsersPage";
+import {TemplateEditor} from "./components/template-editor/TemplateEditor";
 import {
     useAuth0,
     withAuthenticationRequired,
@@ -13,6 +12,13 @@ import {
 import NavMenu from "./components/NavMenu";
 import {Button, Col, Container, Row} from "reactstrap";
 import Footer from "./components/Footer";
+import {RostersPage} from "./components/crud-pages/RostersPage";
+import {UsersPage} from "./components/crud-pages/UsersPage";
+import {TermSchedulePage} from "./components/crud-pages/TermSchedulePage";
+import {TemplatePage} from "./components/crud-pages/TemplatePage";
+import {GradeEditor} from "./components/grades/GradeEditor";
+import {GradeEditorPage} from "./components/grades/GradeEditorPage";
+import {CreateEditTemplate} from "./components/template/CreateEditTemplate";
 
 const ProtectedRoute = (props: {
     component: React.ComponentType<object>;
@@ -52,18 +58,19 @@ export default () => {
             </Row>
             <Row className={'flex-grow-1'}>
                 <Col>
-                    <div className={'container'}>
+                    <div className={'container page-container'}>
                         <Routes>
                             <Route path='/' element={<Home />} />
                             <Route path='/editor' element={<TemplateEditor />} />
                             <Route path='/users' element={<UsersPage />} />
 
-                            <Route path='/profile' element={<UsersPage />} />
+                            <Route path='/profile' element={<GradeEditorPage />} />
+
                             <Route path='/documentation' element={<UsersPage />} />
-                            <Route path='/roster' element={<UsersPage />} />
-                            <Route path='/templates' element={<UsersPage />} />
-                            <Route path='/terms' element={<UsersPage />} />
-                            
+                            <Route path='/roster' element={<RostersPage />} />
+                            <Route path='/templates' element={<CreateEditTemplate />} />
+                            <Route path='/terms' element={<TermSchedulePage />} />
+
                             {//<Route path='/users' element={<ProtectedRoute component={UsersPage} />} />
                             }
                         </Routes>

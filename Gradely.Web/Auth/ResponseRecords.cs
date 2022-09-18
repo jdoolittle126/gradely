@@ -9,6 +9,16 @@ namespace Gradely.Web.Auth
         Teacher
     }
 
+
+    public record Auth0UserListResponse
+    {
+        public string Id { get; set; }
+        public string Email { get; init; }
+        public string FirstName { get; init; }
+        public string LastName { get; init; }
+        public string Role { get; init; }
+    }
+
     public record Auth0UserResponse
     {
         [JsonPropertyName("user_id")]

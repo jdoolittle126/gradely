@@ -29,7 +29,7 @@ namespace Gradely.Web.Controllers
 
         [HttpGet]
         [Authorize("users:view")]
-        public async Task<List<Auth0UserResponse>> GetUsers()
+        public async Task<List<Auth0UserListResponse>> GetUsers()
         {
             var caller = await _client.GetCaller(User);
 
@@ -43,12 +43,21 @@ namespace Gradely.Web.Controllers
 
             
 
-            List<Auth0UserResponse> userList = new();
+            List<Auth0UserListResponse> userList = new();
 
             foreach (var userId in userIdList)
             {
                 var user = await _client.GetUser(userId);
-                userList.Add(user);
+
+                // TODO Get Role
+                userList.Add(new Auth0UserListResponse()
+                {
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Id = user.Id,
+                    Role = "Workin' on it!"
+                });
             }
 
             return userList;
@@ -57,7 +66,7 @@ namespace Gradely.Web.Controllers
 
         [HttpPost]
         [Authorize("users:create")]
-        public async Task<List<Auth0UserResponse>> CreateUser(CreateUserRequest createUserRequest)
+        public async Task<List<Auth0UserListResponse>> CreateUser(CreateUserRequest createUserRequest)
         {
 
             var caller = await _client.GetCaller(User);
@@ -99,7 +108,7 @@ namespace Gradely.Web.Controllers
 
         [HttpPut]
         [Authorize("users:edit")]
-        public async Task<List<Auth0UserResponse>> EditUser(CreateUserRequest createUserRequest)
+        public async Task<List<Auth0UserListResponse>> EditUser(CreateUserRequest createUserRequest)
         {
 
             var caller = await _client.GetCaller(User);

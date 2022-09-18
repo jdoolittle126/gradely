@@ -1,60 +1,116 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import './TemplateEditor.css';
 import DisplayPane from "../generic/DisplayPane";
 import ToolboxPane from "./toolbox-pane/ToolboxPane";
-import {Canvas, Editor, Element, Frame} from "@craftjs/core";
-import {TextIngredient} from "./ingredients/TextIngredient";
-import {ContainerIngredient} from "./ingredients/ContainerIngredient";
-import {Container, Row} from "reactstrap";
+import {Canvas, Editor, Element, Frame, useEditor} from "@craftjs/core";
+import {TextIngredient} from "./ingredients/TextIngredient/TextIngredient";
+import {ContainerIngredient} from "./ingredients/ContainerIngredient/ContainerIngredient";
+import {Button, Container, Row} from "reactstrap";
+import {ToolBarPane} from "./toolbar-pane/ToolBarPane";
+import {BaseContainerIngredient} from "./ingredients/ContainerIngredient/BaseContainerIngredient";
+import {EditorContext} from "../EditorContext";
+import {useLocation} from "react-router-dom";
+import {useAuth0} from "@auth0/auth0-react";
 
-class TemplateEditor extends Component {
 
-    layoutEditor = () => {
-        return (
-            <div className="ratio ratio-letter bg-info">
-                <Frame>
-                    <Element canvas
-                             is={ContainerIngredient}
-                             padding={0}
-                             margin={0}
-                             background="#fff"
-                             data-cy="root-container"
-                    >
-                        <ContainerIngredient background="#eee" margin={4} padding={2}>
-                            <TextIngredient text="Hello!" fontSize={25}></TextIngredient>
-                        </ContainerIngredient>
+const TemplateEditorComponent = () => {
+    const { getAccessTokenSilently } = useAuth0();
+    const {state} = useLocation();
 
-                        <TextIngredient text="Hi!" fontSize={45}></TextIngredient>
-                    </Element>
-                </Frame>
-            </div>
-        );
-    }
+    const {
+        enabled,
+        connectors,
+        actions,
+        query
+    } = useEditor((state) => ({
+        enabled: state.options.enabled,
+    }));
 
-    render() {
-        return (
-            <Container fluid>
+    useEffect(() => {
+        // @ts-ignore
+        if (state.data && state.data !== "") {
+            // @ts-ignore
+            actions.deserialize(state.data);
+        }
+    }, [])
 
-                <Row>
-                    <h1>Template Editor</h1>
-                </Row>
+    return (
+        <div className="row">
+            <DisplayPane className="col-2">
+                <Button color={'primary'}
+                onClick={() => {
 
-                <Editor resolver={{TextIngredient, ContainerIngredient}}>
-                    <div className="row">
-                        <DisplayPane className="col-2">
-                            <ToolboxPane />
-                        </DisplayPane>
-                        <DisplayPane className="col">
-                            {this.layoutEditor()}
-                        </DisplayPane>
-                        <DisplayPane className="col-2">
+                    const test = async () => {
+                        const accessToken = await getAccessTokenSilently();
+                        // @ts-ignore
 
-                        </DisplayPane>
-                    </div>
-                </Editor>
-            </Container>
-        );
-    }
+                        let stateTest: {id: number, name: string, data: string} = state;
+
+                        // @ts-ignore
+                        let val = {
+                            id: stateTest.id,
+                            name: stateTest.name,
+                            data: query.serialize()
+                        };
+
+
+                        // @ts-ignore
+                        const response = await fetch(`${window.location.origin}/api/Template`, {
+                            headers: {
+                                'Accept': "application/json, text/plain, */*",
+                                'Content-Type': "application/json;charset=utf-8",
+                                'Authorization': `Bearer ${accessToken}`
+                            },
+                            method: "PUT",
+                            body: JSON.stringify(val)
+                        });
+
+                        console.log(response);
+                    }
+
+                    test()
+                }}
+
+                >Save</Button>
+                <ToolBarPane />
+                <ToolboxPane />
+            </DisplayPane>
+            <DisplayPane className="col">
+                <div className="ratio ratio-letter bg-info editor-pane"
+                     ref={(ref) => connectors.select(connectors.hover(ref, null), null)}>
+                    <Frame>
+                        <Element canvas
+                                 is={BaseContainerIngredient}
+                                 background="#fff"
+                                 padding={0}
+                                 data-cy="root-container"
+                        >
+
+                        </Element>
+                    </Frame>
+                </div>
+            </DisplayPane>
+            <DisplayPane className="col-2">
+
+            </DisplayPane>
+        </div>
+    );
 }
 
-export default TemplateEditor;
+export const TemplateEditor = () => {
+    return (
+
+        <Container fluid>
+
+            <Row>
+                <h1>Template Editor</h1>
+            </Row>
+
+            <EditorContext>
+               <TemplateEditorComponent></TemplateEditorComponent>
+            </EditorContext>
+        </Container>
+
+    )
+
+}

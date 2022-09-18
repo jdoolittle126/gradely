@@ -6,13 +6,13 @@ import {Field, Form, Formik} from "formik";
 import { ReactstrapInput, ReactstrapRadio } from "reactstrap-formik";
 import {useProtectedApi} from "../../services/UseProtectedApi";
 import {useAuth0} from "@auth0/auth0-react";
+import FormProps from "./FormProps";
 
 enum UserRoles {
     SUPER_ADMIN,
     ADMIN,
     TEACHER
 }
-
 
 const UserSchema = Yup.object().shape(
     {
@@ -34,15 +34,9 @@ const UserSchema = Yup.object().shape(
     }
 );
 
-type UserFormProps = {
-    currentTab: number;
-    loadedId?: number;
-    onSubmit?: (values: any) => void;
-}
+export const UserForm = (props: FormProps) => {
 
-export const UserForm = (props: UserFormProps) => {
-
-    const { getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
+    const { getAccessTokenSilently } = useAuth0();
 
     return (
         <Formik
@@ -50,9 +44,10 @@ export const UserForm = (props: UserFormProps) => {
             validationSchema={UserSchema}
             onSubmit={async (values) => {
 
-                if (props.loadedId === 0) {
+                // TODO Error notify
+                if (props.loadedId === -1) {
 
-                    const accessToken = await getAccessTokenWithPopup({ scope: 'users:create' });
+                    const accessToken = await getAccessTokenSilently({ scope: 'users:create' });
 
                     const response = await fetch(`${window.location.origin}/api/Users`, {
                         headers: {
@@ -67,7 +62,7 @@ export const UserForm = (props: UserFormProps) => {
                     console.log(response);
                 } else {
 
-                    const accessToken = await getAccessTokenWithPopup({ scope: 'users:edit' });
+                    const accessToken = await getAccessTokenSilently({ scope: 'users:edit' });
 
                     const response = await fetch(`${window.location.origin}/api/Users`, {
                         headers: {
@@ -78,12 +73,14 @@ export const UserForm = (props: UserFormProps) => {
                         method: "POST",
                         body: JSON.stringify(values)
                     });
-
+                }
+                if (props.onSubmit) {
+                    props.onSubmit();
                 }
             }}
         >
             {({ errors, touched }) => (
-                <Form>
+                <Form id={props.formName}>
                     <TabContent activeTab={props.currentTab}>
                         <TabPane tabId={0}>
                             <Row>
@@ -132,9 +129,6 @@ export const UserForm = (props: UserFormProps) => {
                                     id="password2"
                                     component={ReactstrapInput}
                                 />
-                            </Row>
-                            <Row>
-                                <button type={'submit'} className={'btn btn-primary'}>Submit</button>
                             </Row>
                         </TabPane>
                         <TabPane tabId={1}>

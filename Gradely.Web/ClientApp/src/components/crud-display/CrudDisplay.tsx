@@ -58,6 +58,13 @@ class CrudDisplay extends React.Component<CrudDisplayProps, CrudDisplayState> {
         super(props);
     }
 
+    componentDidUpdate(prevProps: Readonly<CrudDisplayProps>, prevState: Readonly<CrudDisplayState>, snapshot?: any) {
+        if (this.props.data?.length !== prevProps.data?.length) {
+            this.filter(this.state.filter);
+        }
+    }
+
+
     toggleItemsPerPage = () => {
         this.setState((previousState) => {
             return {
@@ -157,7 +164,7 @@ class CrudDisplay extends React.Component<CrudDisplayProps, CrudDisplayState> {
             <td key={this.keyFor('col', index)}>{index}</td>
         ];
 
-        vals.map((value) => result.push(<td  key={this.keyFor('col', index, value)}>{value}</td>));
+        vals.map((value, index) => result.push(<td  key={this.keyFor(`col${index}`, index, value)}>{value}</td>));
 
         result.push(
             <td key={this.keyFor('col', index, item)}>

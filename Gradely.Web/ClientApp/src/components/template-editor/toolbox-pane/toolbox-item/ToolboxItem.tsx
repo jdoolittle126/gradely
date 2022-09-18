@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TextIngredient} from "../../ingredients/TextIngredient";
+import {TextIngredient} from "../../ingredients/TextIngredient/TextIngredient";
 import {useEditor} from "@craftjs/core";
 
 type ToolboxItemProps = {

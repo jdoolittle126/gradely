@@ -1,8 +1,7 @@
 import {useNode} from "@craftjs/core";
 import React from "react";
 
-// @ts-ignore
-export const ContainerIngredient = ({ background, margin, padding, children, ...props }) => {
+export const BaseContainerIngredient = ({ background, padding, children, ...props }) => {
     const {
         connectors: { connect, drag },
     } = useNode();
@@ -13,7 +12,7 @@ export const ContainerIngredient = ({ background, margin, padding, children, ...
             ref={(ref: any) => {
                 connect(drag(ref))
             }}
-            style={{ margin, background, padding: `${padding}px` }}
+            style={{ background, padding: `${padding}px` }}
         >
             {children}
         </div>
@@ -39,10 +38,10 @@ export const ContainerSettings = () => {
 
 export const ContainerDefaultProps = {
     background: '#ffffff',
-    padding: 3,
+    padding: 0,
 };
 
-ContainerIngredient.craft = {
+BaseContainerIngredient.craft = {
     props: ContainerDefaultProps,
     related: {
         settings: ContainerSettings,

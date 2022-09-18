@@ -37,7 +37,7 @@ const Auth0ProviderWithRedirectCallback = (props: React.PropsWithChildren<{ }>) 
 };
 
 ReactDOM.render(
-    <React.StrictMode>
+    <>
         <Provider store={store}>
             <BrowserRouter>
                 <Auth0ProviderWithRedirectCallback>
@@ -45,7 +45,7 @@ ReactDOM.render(
                 </Auth0ProviderWithRedirectCallback>
             </BrowserRouter>
         </Provider>
-    </React.StrictMode>,
+    </>,
     document.getElementById('root'));
 
 registerServiceWorker();
