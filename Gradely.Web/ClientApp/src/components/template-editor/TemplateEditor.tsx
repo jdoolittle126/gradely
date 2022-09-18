@@ -11,6 +11,7 @@ import {BaseContainerIngredient} from "./ingredients/ContainerIngredient/BaseCon
 import {EditorContext} from "../EditorContext";
 import {useLocation} from "react-router-dom";
 import {useAuth0} from "@auth0/auth0-react";
+import {PropertyPane} from "./properties-pane/PropertyPane";
 
 
 const TemplateEditorComponent = () => {
@@ -27,9 +28,7 @@ const TemplateEditorComponent = () => {
     }));
 
     useEffect(() => {
-        // @ts-ignore
-        if (state.data && state.data !== "") {
-            // @ts-ignore
+        if (state?.data && state.data !== "") {
             actions.deserialize(state.data);
         }
     }, [])
@@ -91,7 +90,7 @@ const TemplateEditorComponent = () => {
                 </div>
             </DisplayPane>
             <DisplayPane className="col-2">
-
+                <PropertyPane></PropertyPane>
             </DisplayPane>
         </div>
     );

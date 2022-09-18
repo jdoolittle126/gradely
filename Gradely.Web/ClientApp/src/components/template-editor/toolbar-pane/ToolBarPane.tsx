@@ -1,6 +1,5 @@
 import React from "react"
 import {useEditor} from "@craftjs/core";
-import LZString from "lz-string";
 
 
 export const ToolBarPane = () => {

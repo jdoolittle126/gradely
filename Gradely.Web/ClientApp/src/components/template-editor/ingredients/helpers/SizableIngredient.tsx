@@ -127,13 +127,11 @@ export const Resizer = ({ propKey, children, ...props }: any) => {
 
     const updateInternalDimensionsInPx = useCallback(() => {
         const { width: nodeWidth, height: nodeHeight } = nodeDimensions.current;
-        console.log(nodeDimensions.current);
         const width = percentToPx(
             nodeWidth,
             resizable.current &&
             getElementDimensions(resizable.current.resizable.parentElement).width
         );
-        console.log('FDDD');
         const height = percentToPx(
             nodeHeight,
             resizable.current &&
