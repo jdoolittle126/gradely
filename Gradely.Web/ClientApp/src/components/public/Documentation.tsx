@@ -58,7 +58,7 @@ const DocPage = () => (
                                 <CreatingaClass />
                             </div>
                             <div className="flex-column pb-2">
-                                <img className="rounded-circle" src="https://picsum.photos/200" />
+                                <img className="rounded" src="https://picsum.photos/200" />
                             </div>
                     </div>
 
@@ -67,7 +67,7 @@ const DocPage = () => (
                                 <UploadingRoster />
                             </div>
                             <div className="flex-column pb-2">
-                                <img className="rounded-circle" src="https://picsum.photos/200" />
+                                <img className="rounded" src="https://picsum.photos/200" />
                             </div>
 
                     </div>
