@@ -1,0 +1,25 @@
+/* Provide sufficient contrast against white background */
+a {
+  color: #fff;
+}
+
+code {
+  color: #E01A78;
+}
+
+.btn-primary1 {
+    color: #fff;
+    background-color: #5D49AF;
+    border-color: #fff;
+}
+
+
+form.feilds{
+    background-color: aqua;
+}
+
+navbar1{
+
+    border-radius: 10px;
+
+}

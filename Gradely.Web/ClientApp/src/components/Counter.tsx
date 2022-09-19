@@ -13,7 +13,7 @@ class Counter extends React.PureComponent<CounterProps> {
     public render() {
         return (
             <React.Fragment>
-                <h1>Counter</h1>
+                <h1>Documentation</h1>
 
                 <p>This is a simple example of a React component.</p>
 

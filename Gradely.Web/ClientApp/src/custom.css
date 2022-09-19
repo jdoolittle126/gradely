@@ -1,14 +1,99 @@
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+  color: #fff;
 }
 
 code {
-  color: #E01A76;
+  color: #E01A78;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.btn-primary1 {
+    color: #fff;
+    background-color: #5D49AF;
+    border-color: #fff;
 }
+
+
+form.feilds{
+    background-color: aqua;
+}
+
+
+navbar1{
+
+    border-radius: 10px;
+
+}
+
+.Logo {
+    background-image: url(./Teaching-amico.png);
+}
+
+.bg-gradely-light {
+  background-color: #9084c0;
+}
+
+.bg-gradely {
+  background-color: #5d49ae;
+}
+
+.bg-gradely-dark {
+  background-color: #413086;
+}
+
+.btn-gradely {
+  background-color: #5d49ae;
+  border: 0;
+}
+
+.btn-gradely:hover, .btn-gradely:focus {
+  background-color: #5d49ae!important;
+  filter: brightness(120%);
+}
+
+.btn-gradely-dark {
+  background-color: #413086!important;
+  border: 0;
+}
+
+.btn-gradely-dark:hover, .btn-gradely-dark:focus {
+  background-color: #413086;
+  filter: brightness(120%);
+}
+
+body {
+  overflow-x: hidden!important;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.component-selected {
+  position: relative;
+}
+
+.component-selected:after {
+  content: " ";
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #8f83bf;
+}
+
+.noput {
+  border: none;
+  background: none;
+}
+
