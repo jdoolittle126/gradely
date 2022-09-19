@@ -21,6 +21,7 @@ import {GradeEditor} from "./components/grades/GradeEditor";
 import {GradeEditorPage} from "./components/grades/GradeEditorPage";
 import {CreateEditTemplate} from "./components/template/CreateEditTemplate";
 import {UseTemplate} from "./components/template/UseTemplate";
+import DocPage from "./components/public/Documentation";
 
 const ProtectedRoute = (props: {
     component: React.ComponentType<object>;
@@ -68,8 +69,8 @@ export default () => {
 
                             <Route path='/profile' element={<GradeEditorPage />} />
 
-                            <Route path='/contactUs' element={<ContactUs />} />
-                            <Route path='/documentation' element={<Documentation />} />
+                            <Route path='/contact' element={<ContactUs />} />
+                            <Route path='/documentation' element={<DocPage />} />
 
                             <Route path='/pick' element={<UseTemplate />} />
                             <Route path='/grades' element={<GradeEditorPage />} />

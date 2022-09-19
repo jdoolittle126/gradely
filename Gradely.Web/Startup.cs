@@ -92,7 +92,7 @@ namespace Gradely.Web
 
             services.AddDbContext<GradelyContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("Default"));
+                options.UseSqlServer(Configuration["ConnectionString"]);
             });
 
             services.AddControllersWithViews();

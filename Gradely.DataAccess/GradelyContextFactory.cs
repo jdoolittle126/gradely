@@ -15,8 +15,7 @@ namespace Gradely.DataAccess
         {
             var optionsBuilder = new DbContextOptionsBuilder<GradelyContext>();
             // TODO Move to config, add args parser for env!
-            optionsBuilder.UseSqlServer(
-                "Data Source=JON-DESKTOP;Initial Catalog=GRADELY_DEV;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer("REPLACE_ME");
 
             return new GradelyContext(optionsBuilder.Options);
         }

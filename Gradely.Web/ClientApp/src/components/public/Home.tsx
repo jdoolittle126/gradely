@@ -5,7 +5,7 @@ import FeatureDisplay from '../generic/FeatureDisplay';
 import Jasonimg from '../generic/Jasonimg';
 import Russelimg from '../generic/Russelimg';
 import Jonathanimg from '../generic/Jonathanimg';
-import CrudDisplay, { CrudAction, CrudActions } from "../crud-display/CrudDisplay"; 
+import CrudDisplay, { CrudAction, CrudActions } from "../crud-display/CrudDisplay";
 
 
 
@@ -38,7 +38,7 @@ const featuresSection = () => (
                 </FeatureDisplay>
             </div>
             <div className="flex-column1 font-weight-bold">
-                
+
                 <FeatureDisplay name="Roster and Grade Entry" image="https://images.unsplash.com/photo-1629652487043-fb2825838f8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=280&q=80" >
                     <p className="">With our Roster and Grade entry, Gradely give teachers the ability to enter classes and students grade with ease.Upon Seling a Template teaches will have the accesibility to add their class, upload a roster and enter student information </p>
                 </FeatureDisplay>
@@ -48,7 +48,7 @@ const featuresSection = () => (
         <div className="text-center flex-column1">
             <h2>Want to learn more?</h2>
             <h3>Visit our
-                <button className="btn btn-primary font-weight-bold mx-2">Docs!</button>
+                <button className="btn btn-primary1 font-weight-bold mx-2">Docs!</button>
             </h3>
         </div>
 
@@ -92,7 +92,7 @@ const Home = () => (
 
         <div className="d-flex flex-row flex-wrap flex-md-nowrap justify-content-around align-items-center py-3 bg-light ">
             <h2 className="text-wrap">Questions? Suggestions? </h2>
-            <button className="btn btn-lg btn-primary font-weight-bold">Contact Us!</button>
+            <button className="btn btn-lg btn-primary font-weight-bold btn-primary1">Contact Us!</button>
         </div>
 
     </div>
