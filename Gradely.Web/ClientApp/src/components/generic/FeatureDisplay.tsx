@@ -28,6 +28,8 @@ class FeatureDisplay extends React.Component<FeatureProps> {
         </div>
         );
     }
+
+    
 }
 
 export default FeatureDisplay;
