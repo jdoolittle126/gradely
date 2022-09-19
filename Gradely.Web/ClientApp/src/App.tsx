@@ -42,10 +42,7 @@ export default () => {
                     <div className="spinner-border" role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
-                    <p className={'mt-2 fs-2 text'}>Taking too long?</p>
-                    <a className={'btn btn-gradely-dark text-light'} href={window.location.origin}>
-                        Try signing back in!
-                    </a>
+                    <p className={'mt-2 fs-2 text'}>Thanks for choosing Gradely!</p>
                 </div>
             </div>
         );
@@ -64,8 +61,9 @@ export default () => {
                     <div className={'container page-container'}>
                         <Routes>
                             <Route path='/' element={<Home />} />
-                            <Route path='/editor' element={<TemplateEditor />} />
-                            <Route path='/users' element={<UsersPage />} />
+
+                            <Route path='/editor' element={<ProtectedRoute component={TemplateEditor} />}/>
+                            <Route path='/users' element={<ProtectedRoute component={UsersPage} />}/>
 
                             <Route path='/profile' element={<GradeEditorPage />} />
 
@@ -75,10 +73,9 @@ export default () => {
                             <Route path='/pick' element={<UseTemplate />} />
                             <Route path='/grades' element={<GradeEditorPage />} />
 
-                            <Route path='/documentation' element={<UsersPage />} />
-                            <Route path='/roster' element={<RostersPage />} />
-                            <Route path='/templates' element={<CreateEditTemplate />} />
-                            <Route path='/terms' element={<TermSchedulePage />} />
+                            <Route path='/roster' element={<ProtectedRoute component={RostersPage} />}/>
+                            <Route path='/templates' element={<ProtectedRoute component={CreateEditTemplate} />}/>
+                            <Route path='/terms' element={<ProtectedRoute component={TermSchedulePage} />}/>
 
                             {//<Route path='/users' element={<ProtectedRoute component={UsersPage} />} />
                             }
