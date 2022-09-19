@@ -6,30 +6,10 @@
 }
 
 
-/* Nav button for the side bar */
-button.m-1 {
-    background-color: #5D49AF;
+.nopad {
+    margin: 0 -12px!important;
+    width: calc(100% + 24px);
 }
-
-/* Login Button */
-button.m-2 {
-    background-color: #5D49AF;
-    
-}
-
-/* Sign up Button */
-button.m-3 {
-    background-color: #413087;
-}
-
-
-/*Nav bar style for home, features, contact us, loging and sign up */
-.navbar-nav {
-    background-color: #9185C1;
-    border-radius: 10px;
-   
-}
-
 
 html { font-size: 14px; }
 

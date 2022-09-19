@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap';
+import {Nav, Navbar, NavLink, Offcanvas, OffcanvasBody, OffcanvasHeader} from 'reactstrap';
+import {Link} from "react-router-dom";
+import {SideBarLink} from "./generic/SideBarLink";
 
 
 
@@ -7,51 +9,50 @@ import { Offcanvas, OffcanvasBody, OffcanvasHeader } from 'reactstrap';
 
 export default class SideBar extends React.PureComponent<{isOpen: boolean, toggle: () => void}, { }> {
 
+    public render() {
+        return (
+            <Offcanvas toggle={this.props.toggle} isOpen={this.props.isOpen} className={'bg-light border-0 px-2'}>
+                <OffcanvasHeader toggle={this.props.toggle} className={'py-0 mb-0'}>
+                    <p className={'fs-2'}>Menu</p>
+                </OffcanvasHeader>
+                <hr/>
+                <OffcanvasBody className={'px-0 pt-0'}>
+                    <Nav pills vertical fill onClick={() => {
+                        this.props.toggle()
+                    }}>
 
-        public render() {
-            return (
-                <div className="w-50 ">
-                    <Offcanvas toggle={this.props.toggle} isOpen={this.props.isOpen}>
-                        <OffcanvasHeader toggle={this.props.toggle}>
-                            <h3>Gradely</h3>
-                        </OffcanvasHeader>
-                        <OffcanvasBody>
-                            <div>
-                                { /* these divs are for teachers */}
-                                <div>
-                                    { /* route to roster page */}
-                                    <div>
-                                        <ul className="nav nav-pills flex-column  ">
+                        <NavLink tag={Link} className="text-dark" to="/roster">
+                            <SideBarLink
+                                icon={'fa-solid fa-children'}
+                                text={'My Roster'}
+                            ></SideBarLink>
+                        </NavLink>
 
-                                           <div>
-                                                <li className="nav-item list-style-type circle border-bottom ">
-                                                    <i className="fa fa-home">Roster</i>
-                                                </li>
-                                            </div>
+                        <NavLink tag={Link} className="text-dark" to="/users">
+                            <SideBarLink
+                                icon={'fa-solid fa-users'}
+                                text={'Users'}
+                            ></SideBarLink>
+                        </NavLink>
 
-                                            <div className="flex-row">
-                                                <li className="nav-item border-bottom position-relative ">
-                                                      <i className="fa fa-clipboard " ref="#"></i>
-                                                </li>
-                                            </div>
+                        <NavLink tag={Link} className="text-dark" to="/templates">
+                            <SideBarLink
+                                icon={'fa-regular fa-clipboard'}
+                                text={'Templates'}
+                            ></SideBarLink>
+                        </NavLink>
 
-                                            <li className="flex-row">
-                                                <a className="nav-item border-bottom">Roster
-                                                    <i className=" fa-solid fa-users"></i>
-                                                </a>
-                                            </li>
+                        <NavLink tag={Link} className="text-dark" to="/terms">
+                            <SideBarLink
+                                icon={'fa-regular fa-calendar-days'}
+                                text={'Term Calendar'}
+                            ></SideBarLink>
+                        </NavLink>
 
-                                        </ul>
+                    </Nav>
 
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </OffcanvasBody>
-                    </Offcanvas>
-                </div>
+                </OffcanvasBody>
+            </Offcanvas>
         );
     }
 
