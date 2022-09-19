@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './components/public/Home';
-
-import './custom.css'
+import ContactUs from './components/ContactUs';
+import Documentation from './components/public/Documentation';
+import './custom.css';
 import {TemplateEditor} from "./components/template-editor/TemplateEditor";
 import {
     useAuth0,
@@ -66,6 +67,9 @@ export default () => {
                             <Route path='/users' element={<UsersPage />} />
 
                             <Route path='/profile' element={<GradeEditorPage />} />
+
+                            <Route path='/contactUs' element={<ContactUs />} />
+                            <Route path='/documentation' element={<Documentation />} />
 
                             <Route path='/pick' element={<UseTemplate />} />
                             <Route path='/grades' element={<GradeEditorPage />} />

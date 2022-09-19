@@ -3,6 +3,10 @@ import {Nav, Navbar, NavLink, Offcanvas, OffcanvasBody, OffcanvasHeader} from 'r
 import {Link} from "react-router-dom";
 import {SideBarLink} from "./generic/SideBarLink";
 
+
+
+
+
 export default class SideBar extends React.PureComponent<{isOpen: boolean, toggle: () => void}, { }> {
 
     public render() {
@@ -51,5 +55,7 @@ export default class SideBar extends React.PureComponent<{isOpen: boolean, toggl
             </Offcanvas>
         );
     }
+
+    
 
 }

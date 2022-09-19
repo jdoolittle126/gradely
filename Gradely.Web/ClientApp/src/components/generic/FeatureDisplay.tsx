@@ -16,7 +16,7 @@ class FeatureDisplay extends React.Component<FeatureProps> {
         return (
         <div className="container text-center my-1">
             <div>
-                <img className="rounded-circle" src={this.props.image == '' ? 'https://picsum.photos/200' : this.props.image}/>
+                    <img className="rounded w-75" src={this.props.image == '' ? '' : this.props.image}/>
             </div>
             <div className="pt-2">
                 <h4>{this.props.name}</h4>
@@ -28,6 +28,8 @@ class FeatureDisplay extends React.Component<FeatureProps> {
         </div>
         );
     }
+
+    
 }
 
 export default FeatureDisplay;

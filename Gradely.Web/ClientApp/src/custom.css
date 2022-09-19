@@ -1,16 +1,32 @@
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+  color: #fff;
 }
 
 code {
-  color: #E01A76;
+  color: #E01A78;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #5D49AF;
+    border-color: #fff;
+}
+
+
+form.feilds{
+    background-color: aqua;
+}
+
+
+navbar1{
+
+    border-radius: 10px;
+
+}
+
+.Logo {
+    background-image: url(./Teaching-amico.png);
 }
 
 .bg-gradely-light {
@@ -80,3 +96,4 @@ body {
   border: none;
   background: none;
 }
+
