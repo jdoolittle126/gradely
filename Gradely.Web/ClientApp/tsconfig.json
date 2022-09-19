@@ -4,19 +4,20 @@
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noUnusedLocals": false,
     "noEmit": true,
     "jsx": "react",
     "lib": [
       "es2015",
       "dom"
     ],
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true
   },
   "include": [
