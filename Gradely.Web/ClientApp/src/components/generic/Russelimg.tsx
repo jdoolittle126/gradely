@@ -16,7 +16,7 @@ class FeatureDisplay extends React.Component<FeatureProps> {
         return (
         <div className="container text-center my-1">
             <div>
-                    <img className="rounded w-50" src={this.props.image == '' ? 'https://cdn.discordapp.com/attachments/958887259078262804/1021263801133322310/russ.PNG' : this.props.image}/>
+                    <img className="rounded w-50" src={this.props.image == '' ? '../pictures/russ.jpg' : this.props.image}/>
             </div>
             <div className="pt-2">
                 <h4>{this.props.name}</h4>

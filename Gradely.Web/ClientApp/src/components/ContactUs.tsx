@@ -21,7 +21,7 @@ const ContactUs = () => (
                 <h1>Contact Form</h1>
                 <br></br>
                 { /* contact us form */}
-                <form method="post" className="w-75 h-50">
+                <form className="w-75 h-50">
 
                     <input type='text' placeholder=' First Name' className="w-75 mb-4" />
                     <input type='text' placeholder=' Last Name' className="w-75 mb-4" />
