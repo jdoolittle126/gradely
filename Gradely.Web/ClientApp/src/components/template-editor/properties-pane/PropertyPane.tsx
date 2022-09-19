@@ -1,9 +1,8 @@
 import { useEditor, ROOT_NODE } from '@craftjs/core';
 import React, {useState} from 'react';
-import {UncontrolledAccordion } from "reactstrap";
+import {Row, UncontrolledAccordion} from "reactstrap";
 
 export const PropertyPane = () => {
-
     const { actions, selected, isEnabled } = useEditor((state, query) => {
         const currentNodeId = query.getEvent('selected').last();
         let selected;
@@ -26,27 +25,30 @@ export const PropertyPane = () => {
     });
 
 
-    return isEnabled && (
-        <div className="py-1 h-full">
-            {selected && (
-
+    return (
+        <>
+        <div className='text-center'>
+            <h3 className='border-bottom pb-1'>Properties</h3>
+        </div>
+        {isEnabled ? (
+            <div className="py-1 h-full">
+                {selected && (
                     <div>
-                        {selected?.settings && React.createElement(selected?.settings)}
+                        <UncontrolledAccordion flush open={''}>
+                            {selected?.settings && React.createElement(selected?.settings)}
+                        </UncontrolledAccordion>
                     </div>
 
-            )}
-
-            {!selected && (
-                <div
-                    className="px-5 py-2 flex flex-col items-center h-full justify-center text-center"
-                    style={{
-                        color: 'rgba(0, 0, 0, 0.5607843137254902)',
-                        fontSize: '11px',
-                    }}
-                >
-                    MERP
-                </div>
-            )}
-        </div>
-    );
+                )}
+                {!selected && (
+                    <div
+                        className="text-center text-muted"
+                    >
+                        Select an item to see it's properties!
+                    </div>
+                )}
+            </div>
+        ) : null}
+        </>
+)
 };

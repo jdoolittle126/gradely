@@ -21,19 +21,14 @@ export const PropertyTextInput = ({onChange, value, prefix, label, type, ...prop
 
     return (
         <div
-            style={{ width: '100%', position: 'relative' }}
             onClick={() => {
                 setActive(true);
             }}
         >
             {(type === 'color' || type === 'bg') && active ? (
                 <div
-                    className="absolute"
-                    style={{
-                        zIndex: 99999,
-                        top: 'calc(100% + 10px)',
-                        left: '-5%',
-                    }}
+                    className=""
+                    style={{position: 'absolute', bottom: 50, right: 50}}
                 >
                     <div
                         className="fixed top-0 left-0 w-full h-full cursor-pointer"
@@ -52,7 +47,7 @@ export const PropertyTextInput = ({onChange, value, prefix, label, type, ...prop
                 </div>
             ) : null}
 
-            <InputGroup>
+            <div>
                 <Label>
                     {label}
                 </Label>
@@ -68,7 +63,7 @@ export const PropertyTextInput = ({onChange, value, prefix, label, type, ...prop
                         setInternalValue(e.target.value);
                     }}
                 />
-            </InputGroup>
+            </div>
 
 
 

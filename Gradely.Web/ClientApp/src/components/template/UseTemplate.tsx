@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react"
 import {Button, Card, CardBody, CardFooter, CardHeader, Col, Input, InputGroup, Row} from "reactstrap";
-import {TemplateList} from "./TemplateList";
 import {TemplatePreview} from "./TemplatePreview";
 import {useAuth0} from "@auth0/auth0-react";
-import {useNavigate, useNavigation} from "react-router-dom";
+import {useLocation, useNavigate, useNavigation} from "react-router-dom";
 
-export const CreateEditTemplate = () => {
-
+export const UseTemplate = () => {
+    const {state} = useLocation();
     const navigate = useNavigate();
     const { getAccessTokenSilently } = useAuth0();
     const [selectedId, setSelectedId] = useState(0);
@@ -68,54 +67,16 @@ export const CreateEditTemplate = () => {
                 </CardBody>
                 <CardFooter>
 
-                    <InputGroup>
 
-                        {selectedId !== 0 ? (
-                            <Button color={'secondary'} onClick={() => {
-                                let datasss = objectData.find((item) => item.id === selectedId)
-                                navigate('/editor', { state: datasss });
-                            }}>Update</Button>
-                        ): null}
-
-                        <Input
-                        id={'imSoTired'}
-                        ></Input>
-                        <Button
-                            color={'primary'}
-                            onClick={() => {
-
-                                const funky = async () => {
-                                    const accessToken = await getAccessTokenSilently();
-                                    // @ts-ignore
-                                    let value = document.getElementById('imSoTired').value;
-
-                                    const response = await fetch(`${window.location.origin}/api/Template`, {
-                                        headers: {
-                                            'Accept': "application/json, text/plain, */*",
-                                            'Content-Type': "application/json;charset=utf-8",
-                                            'Authorization': `Bearer ${accessToken}`
-                                        },
-                                        method: "POST",
-                                        body: JSON.stringify({
-                                            name: value,
-                                            data: ''
-                                        })
-                                    });
-
-                                    let datasss = await response.json();
-
-                                    navigate('/editor', { state: datasss });
-
-                                    console.log(datasss);
-                                }
-
-                                funky().then(fetchData);
-
-                            }}>
-                            <i className="fas fa-plus me-2"></i>
-                            Create
-                        </Button>
-                    </InputGroup>
+                    {selectedId !== 0 ? (
+                        <>
+                        <Button color={'secondary'} onClick={() => {
+                            console.log(state);
+                            let datasss = objectData.find((item) => item.id === selectedId)
+                            navigate('/grades', { state: {roster: state, template: datasss} });
+                        }}>Use Template</Button>
+                        </>
+                    ): null}
 
 
                 </CardFooter>

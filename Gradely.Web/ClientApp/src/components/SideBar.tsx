@@ -17,13 +17,6 @@ export default class SideBar extends React.PureComponent<{isOpen: boolean, toggl
                         this.props.toggle()
                     }}>
 
-                        <NavLink tag={Link} className="text-dark" to="/profile">
-                            <SideBarLink
-                                icon={'fa-regular fa-id-badge'}
-                                text={'My Profile'}
-                            ></SideBarLink>
-                        </NavLink>
-
                         <NavLink tag={Link} className="text-dark" to="/roster">
                             <SideBarLink
                                 icon={'fa-solid fa-children'}

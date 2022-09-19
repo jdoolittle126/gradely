@@ -35,6 +35,7 @@ namespace Gradely.Web.Controllers
             var user = await _context.Users
                 .Include(u => u.Classes)
                 .ThenInclude(c => c.Students)
+                .ThenInclude(s => s.Grades)
                 .Include(u => u.Classes)
                 .ThenInclude(c => c.TermSchedule)
                 .FirstOrDefaultAsync(u => u.AuthIdentifier == caller.Id);
@@ -42,6 +43,67 @@ namespace Gradely.Web.Controllers
             return user.Classes;
         }
 
+        [HttpPost]
+        [Authorize]
+        public async Task<Class> CreateRoster(Class classs)
+        {
+            var caller = await _client.GetCaller(User);
+
+            var term = await _context.TermsSchedules
+                .Include(t => t.Terms)
+                .FirstOrDefaultAsync(o => o.Id == classs.TermSchedule.Id);
+
+            var user = await _context.Users
+                .Include(u => u.Classes)
+                .ThenInclude(c => c.Students)
+                .ThenInclude(s => s.Grades)
+                .Include(u => u.Classes)
+                .ThenInclude(c => c.TermSchedule)
+                .FirstOrDefaultAsync(u => u.AuthIdentifier == caller.Id);
+
+            classs.TermSchedule = term;
+            user.Classes.Add(classs);
+            await _context.SaveChangesAsync();
+            return classs;
+        }
+
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<List<Grade>> GetGrades(int id)
+        {
+            var student = await _context.Students
+                .Include(u => u.Grades)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            return student.Grades;
+        }
+
+        [HttpPost("{id}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateGrades(int id, List<Grade> grades)
+        {
+            var stud = await _context.Students
+                .Include(s => s.Grades)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            foreach (var grade in grades)
+            {
+                var g = stud.Grades.FirstOrDefault(g => g.BoundTo == grade.BoundTo);
+
+                if (g is null)
+                {
+                    stud.Grades.Add(grade);
+                }
+                else
+                {
+                    g.Value = grade.Value;
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
     }
 }

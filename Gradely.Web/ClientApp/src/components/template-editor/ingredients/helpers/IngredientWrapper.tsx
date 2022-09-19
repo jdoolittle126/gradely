@@ -67,35 +67,15 @@ export const IngredientWrapper = ({ render }) => {
             ? dom.getBoundingClientRect()
             : { top: 0, left: 0, bottom: 0 };
         return {
-            top: `${top > 0 ? top : bottom}px`,
+            top: `${(top > 0 ? top + document.documentElement.scrollTop : bottom - document.documentElement.scrollTop)}px`,
             left: `${left}px`,
         };
     }, []);
 
-    const scroll = useCallback(() => {
-        const { current: currentDOM } = currentRef;
-
-        if (!currentDOM) return;
-        const { top, left } = getPos(dom);
-        currentDOM.style.top = top;
-        currentDOM.style.left = left;
-    }, [dom, getPos]);
-
-    useEffect(() => {
-        document
-            .querySelector('.editor-pane')
-            .addEventListener('scroll', scroll);
-
-        return () => {
-            document
-                .querySelector('.editor-pane')
-                .removeEventListener('scroll', scroll);
-        };
-    }, [scroll]);
 
     return (
         <>
-            {(isHover || isActive) && id !== ROOT_NODE
+            {(isHover) && id !== ROOT_NODE
                 ? ReactDOM.createPortal(
                     <IndicatorDiv
                         ref={currentRef}

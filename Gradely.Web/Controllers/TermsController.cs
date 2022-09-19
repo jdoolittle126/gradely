@@ -42,6 +42,26 @@ namespace Gradely.Web.Controllers
             return org.TermSchedules;
         }
 
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<TermSchedule> GetTerm(int id)
+        {
+
+            var caller = await _client.GetCaller(User);
+
+            var org = _context.Organizations
+                .Include(o => o.TermSchedules)
+                .ThenInclude(t => t.Terms)
+                .FirstOrDefault(o => o.Id == caller.MetaData.OrganizationId);
+
+            return org.TermSchedules.FirstOrDefault(x => x.Id == id);
+
+        }
+
+
+
+
         [HttpPost]
         [Authorize]
         public async Task<List<TermSchedule>> CreateTerm(TermSchedule schedule)

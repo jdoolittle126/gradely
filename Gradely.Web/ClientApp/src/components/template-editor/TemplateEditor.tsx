@@ -15,7 +15,7 @@ import {PropertyPane} from "./properties-pane/PropertyPane";
 
 
 const TemplateEditorComponent = () => {
-    const { getAccessTokenSilently } = useAuth0();
+
     const {state} = useLocation();
 
     const {
@@ -35,43 +35,9 @@ const TemplateEditorComponent = () => {
 
     return (
         <div className="row">
+            <ToolBarPane templateState={state}/>
+
             <DisplayPane className="col-2">
-                <Button color={'primary'}
-                onClick={() => {
-
-                    const test = async () => {
-                        const accessToken = await getAccessTokenSilently();
-                        // @ts-ignore
-
-                        let stateTest: {id: number, name: string, data: string} = state;
-
-                        // @ts-ignore
-                        let val = {
-                            id: stateTest.id,
-                            name: stateTest.name,
-                            data: query.serialize()
-                        };
-
-
-                        // @ts-ignore
-                        const response = await fetch(`${window.location.origin}/api/Template`, {
-                            headers: {
-                                'Accept': "application/json, text/plain, */*",
-                                'Content-Type': "application/json;charset=utf-8",
-                                'Authorization': `Bearer ${accessToken}`
-                            },
-                            method: "PUT",
-                            body: JSON.stringify(val)
-                        });
-
-                        console.log(response);
-                    }
-
-                    test()
-                }}
-
-                >Save</Button>
-                <ToolBarPane />
                 <ToolboxPane />
             </DisplayPane>
             <DisplayPane className="col">

@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useNode} from "@craftjs/core";
+import {EntryProperties} from "./EntryProperties";
 
 type EntryIngredientProps = {
-    termId?: number;
+    termIds: number[];
+    required: boolean;
+    guid: string;
 }
 
-
-// Move to key service provider
 export const EntryIngredient = (props: EntryIngredientProps) => {
 
     const {
@@ -18,7 +19,6 @@ export const EntryIngredient = (props: EntryIngredientProps) => {
         dragged: state.events.dragged,
     }));
 
-
     return (
         <div
             ref={(ref: any) => {
@@ -29,33 +29,21 @@ export const EntryIngredient = (props: EntryIngredientProps) => {
                 {position: 'relative'}
             }
         >
-            <input readOnly style={{width: '100%'}} data-gradely-entry={{
-                termFor: 4,
-                required: true,
-                regex: ''
-            }} type={'text'}/>
+
+            <input readOnly  style={{width: '100%'}} data-gradely-entry={JSON.stringify({
+                termsFor: props.termIds,
+                required: props.required,
+                guide: props.guid
+            })}></input>
         </div>
     );
 }
 
-const EntryIngredientSettings = () => {
-    const {
-        actions: { setProp },
-        fontSize,
-    } = useNode((node) => ({
-        text: node.data.props.text,
-        fontSize: node.data.props.fontSize,
-    }));
-
-    return (
-        <>
-
-        </>
-    );
-};
 
 export const EntryIngredientDefaultProps: EntryIngredientProps = {
-    termId: 1
+    termIds: [],
+    required: false,
+    guid: ""
 };
 
 EntryIngredient.defaultProps = EntryIngredientDefaultProps;
@@ -63,6 +51,6 @@ EntryIngredient.defaultProps = EntryIngredientDefaultProps;
 EntryIngredient.craft = {
     props: EntryIngredientDefaultProps,
     related: {
-        settings: EntryIngredientSettings,
+        toolbar: EntryProperties,
     },
 };

@@ -16,10 +16,9 @@ export const PropertySection = ({ title, props, summary, children }: any) => {
             }, {}),
     }));
     return (
-        <UncontrolledAccordion open="1">
             <AccordionItem>
-            <AccordionHeader targetId="1">
-                {title}
+            <AccordionHeader targetId={title}>
+                <div className={'fw-bold'}>{title}</div>
                 <div className="px-6 w-full">
                     {summary && props ? (
                         <div>
@@ -35,10 +34,9 @@ export const PropertySection = ({ title, props, summary, children }: any) => {
                     ) : null}
                 </div>
             </AccordionHeader>
-            <AccordionBody accordionId="1">
+            <AccordionBody accordionId={title}>
                 {children}
             </AccordionBody>
             </AccordionItem>
-        </UncontrolledAccordion>
     );
 };

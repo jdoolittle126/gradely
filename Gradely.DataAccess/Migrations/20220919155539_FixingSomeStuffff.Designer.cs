@@ -4,6 +4,7 @@ using Gradely.DataAccess.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gradely.DataAccess.Migrations
 {
     [DbContext(typeof(GradelyContext))]
-    partial class GradelyContextModelSnapshot : ModelSnapshot
+    [Migration("20220919155539_FixingSomeStuffff")]
+    partial class FixingSomeStuffff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

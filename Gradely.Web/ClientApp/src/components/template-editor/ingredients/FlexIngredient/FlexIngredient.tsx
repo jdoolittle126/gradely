@@ -28,7 +28,7 @@ const defaultProps = {
     flexRow: false,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    fillSpace: 'yes',
+    fillSpace: 'no',
     padding: ['0', '0', '0', '0'],
     margin: ['0', '0', '0', '0'],
     background: { r: 200, g: 200, b: 200, a: 1 },
