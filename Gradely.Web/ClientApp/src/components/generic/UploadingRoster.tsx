@@ -9,7 +9,7 @@ const UploadingRoster = () => (
             <h2>Uploading A Roster</h2>
         </div>
 
-        <p className="text-justify px-1 text-break">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p className="text-justify px-1 text-break">You can add students to a class roster by uploading a roster file containing information for each student.With Gradleys Upload a roster feature we give teachers the ability to be able o upload a roster with ease. Uploading a roster you must ensure you have active student attending the school to ensure no mistakes. Upon uploading a roster You must make sure your spelling is correct and student information is accurate</p>
 
         
     </div>

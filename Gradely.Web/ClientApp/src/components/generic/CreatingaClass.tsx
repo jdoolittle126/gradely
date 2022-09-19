@@ -8,7 +8,7 @@ const CreatingaClass = () => (
             <h2>Creating a Class</h2>
         </div>
 
-        <p className="text-justify px-1 text-break">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p className="text-justify px-1 text-break">Crating a class of students you must obtain roster and class informaton from school with student names and information for each student.With Gradleys Create roster feature we give teachers the ability to be able o create a class with ease. Creating a class you must ensure you have active student attending the school to ensure no mistakes. Upon creatinga class You must make sure your spelling is correct and student information is accurate</p>
 
 
 
